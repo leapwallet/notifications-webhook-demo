@@ -2,7 +2,7 @@ import type { ActionArgs, LoaderArgs } from '@remix-run/node';
 import { badRequest, created } from 'remix-utils';
 import { emitter } from '~/services/emitter.server';
 
-export default function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderArgs) {
   return new Response('Not Allowed', {
     statusText: 'Method Not Allowed',
     status: 405,

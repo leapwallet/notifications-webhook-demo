@@ -29,7 +29,7 @@ export async function loader({ request }: LoaderArgs) {
   return response;
 }
 
-export default function action({ request }: ActionArgs) {
+export async function action({ request }: ActionArgs) {
   return new Response('Not Allowed', {
     statusText: 'Method Not Allowed',
     status: 405,

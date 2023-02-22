@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "build:static": "next build && next export -o build"
   },
   "dependencies": {
     "next": "^13.1.6",

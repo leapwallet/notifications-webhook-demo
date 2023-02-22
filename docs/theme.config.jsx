@@ -11,7 +11,7 @@ export default {
     const { asPath } = useRouter();
     if (asPath !== '/') {
       return {
-        titleTemplate: '%s - SWR',
+        titleTemplate: '%s - Leap Alerts',
       };
     }
   },
@@ -26,4 +26,5 @@ export default {
       </svg>
     ),
   },
+  faviconGlyph: '🔔',
 };

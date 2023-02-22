@@ -1,0 +1,41 @@
+# Messages
+
+Each message is a JSON object. Dates are in simplified extended ISO format (ISO 8601), which is always 24 or 27 characters long (YYYY-MM-DDTHH:mm:ss.sssZ or ±YYYYYY-MM-DDTHH:mm:ss.sssZ, respectively). The timezone is always zero UTC offset, as denoted by the suffix "Z".
+
+There are four fields common to every JSON object which are `"__type"` (used to discern how the data structure should be parsed), `"blockchain"` (which blockchain the transaction was executed on), `"txHash"` (the transaction's hash), and `"isSuccessful"` (whether the transaction succeeded or failed). JSON objects for Cosmos transactions additionally have a `"memo"` field in common which is an optional note the user added while making the transaction such as `""` or `"I owed you 1.5 ATOM since you paid for lunch."`.
+
+Here are the messages that can be sent:
+- [`cosmos.authz.exec`](msgs/authz/exec.md)
+- [`cosmos.authz.grant`](msgs/authz/grant.md)
+- [`cosmos.authz.revoke`](msgs/authz/revoke.md)
+- [`cosmos.bank.multiSend`](msgs/bank/multi-send.md)
+- [`cosmos.bank.send`](msgs/bank/send.md)
+- [`cosmos.feeGrant.grantAllowance`](msgs/fee-grant/grant-allowance.md)
+- [`cosmos.feeGrant.revokeAllowance`](msgs/fee-grant/revoke-allowance.md)
+- [`cosmos.gov.deposit`](msgs/gov/deposit.md)
+- [`cosmos.gov.submitProposal`](msgs/gov/submit-proposal.md)
+- [`cosmos.gov.vote`](msgs/gov/vote.md)
+- [`cosmos.slashing.unjail`](msgs/slashing/unjail.md)
+- [`cosmos.staking.beginRedelegate`](msgs/staking/begin-redelegate.md)
+- [`cosmos.staking.createValidator`](msgs/staking/create-validator.md)
+- [`cosmos.staking.delegate`](msgs/staking/delegate.md)
+- [`cosmos.staking.editValidator`](msgs/staking/edit-validator.md)
+- [`cosmos.staking.undelegate`](msgs/staking/undelegate.md)
+- [`cosmos.ibc.send`](msgs/ibc/send.md)
+- [`cosmos.ibc.receive`](msgs/ibc/receive.md)
+- [`cosmos.gamm.create`](msgs/gamm/create.md)
+- [`cosmos.gamm.exit`](msgs/gamm/exit.md)
+- [`cosmos.gamm.exitExactAndSwap`](msgs/gamm/exit-exact-and-swap.md)
+- [`cosmos.gamm.exitMaxAndSwap`](msgs/gamm/exit-max-and-swap.md)
+- [`cosmos.gamm.join`](msgs/gamm/join.md)
+- [`cosmos.gamm.swapExact`](msgs/gamm/swap-exact.md)
+- [`cosmos.gamm.swapExactAndJoin`](msgs/gamm/swap-exact-and-join.md)
+- [`cosmos.gamm.swapMax`](msgs/gamm/swap-max.md)
+- [`cosmos.gamm.swapMaxAndJoin`](msgs/gamm/swap-max-and-join.md)
+- [`cosmos.lockup.lock`](msgs/lockup/lock.md)
+- [`cosmos.lockup.unlock`](msgs/lockup/unlock.md)
+- [`cosmos.lockup.unlockAll`](msgs/lockup/unlock-all.md)
+- [`cosmos.superfluid.delegate`](msgs/superfluid/delegate.md)
+- [`cosmos.superfluid.undelegate`](msgs/superfluid/undelegate.md)
+- [`cosmos.superfluid.lockAndDelegate`](msgs/superfluid/lock-and-delegate.md)
+- [`cosmos.superfluid.unlockAndUndelegate`](msgs/superfluid/unlock-and-undelegate.md)

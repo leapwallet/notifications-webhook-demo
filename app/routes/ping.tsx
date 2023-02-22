@@ -8,7 +8,7 @@ export async function loader() {
 }
 
 export default function action({ request }: ActionArgs) {
-  return new Response(null, {
+  return new Response('Not Allowed', {
     statusText: 'Method Not Allowed',
     status: 405,
   });

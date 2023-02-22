@@ -47,11 +47,19 @@ export default function HomePage() {
 
   return (
     <div className="w-full h-screen bg-gradient-to-tr from-gray-900 via-slate-900 to-gray-900 backdrop-blur-md py-8">
-      <header className="container mx-auto px-4 sm:px-auto text-gray-200">
+      <header className="container mx-auto px-4 sm:px-auto text-gray-200 flex justify-between items-center">
         <div className="flex items-center">
           <BellRinging strokeWidth={28} size={28} />
           <h1 className="font-bold text-2xl sm:text-3xl ml-2">Leap Alerts</h1>
         </div>
+        <a
+          href="https://leapwallet.github.io/notifications-webhook-demo/"
+          target="_blank"
+          rel="noreferrer noopener"
+          className="block underline text-gray-300 hover:text-green-400 transition-all text-lg font-bold"
+        >
+          Docs
+        </a>
       </header>
       <main className="container mx-auto px-4 sm:px-auto mt-6 sm:mt-8 flex flex-col-reverse sm:block">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-end mt-6 sm:mt-0">

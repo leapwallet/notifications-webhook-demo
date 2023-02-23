@@ -209,7 +209,7 @@ export default function HomePage() {
           </div>
         </div>
       </main>
-      <footer className="container mx-auto px-4 sm:px-auto mt-8 sm:mt-4">
+      <footer className="container mx-auto px-4 sm:px-auto my-8 sm:my-4">
         <p className="text-gray-400 text-sm text-center sm:text-left">
           Powered by{' '}
           <a

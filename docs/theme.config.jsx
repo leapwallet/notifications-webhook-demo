@@ -34,4 +34,18 @@ export default {
     ),
   },
   faviconGlyph: '🔔',
+  footer: {
+    text: (
+      <span>
+        MIT {new Date().getFullYear()} ©{' '}
+        <a
+          href="https://leapwallet.io"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LeapWallet
+        </a>
+      </span>
+    ),
+  },
 };

@@ -2,9 +2,9 @@ import { chains, types } from '~/lib/constants';
 import { useEffect, useState } from 'react';
 import { ClientOnly } from 'remix-utils';
 import { ReactJson, theme } from '~/react-json.client';
-import Select from 'react-select';
 import BellRinging from '~/assets/icons';
 import { useEventSource } from '~/hooks/use-event-source';
+import { Select } from '~/react-select.client';
 
 export default function HomePage() {
   const [type, setType] = useState<string>('cosmos.bank.send');
@@ -71,44 +71,71 @@ export default function HomePage() {
             <label className="text-gray-400 uppercase tracking-wider font-bold">
               Tx Type
             </label>
-            <Select<{ value: string; label: string }>
-              value={{
-                label: type,
-                value: type,
+            <ClientOnly
+              fallback={
+                <div className="bg-gray-800 h-9 rounded-md border border-gray-400 w-full sm:w-[250px] mt-1" />
+              }
+            >
+              {() => {
+                return (
+                  <Select<{ value: string; label: string }>
+                    value={{
+                      label: type,
+                      value: type,
+                    }}
+                    onChange={(e) => {
+                      if (e) setType(e.value);
+                    }}
+                    isClearable={false}
+                    isSearchable={true}
+                    name="type"
+                    inputId="select-type"
+                    instanceId="select-type"
+                    options={types.map((type) => ({
+                      value: type,
+                      label: type,
+                    }))}
+                    className="min-w-[250px] mt-1"
+                    classNamePrefix="react-select"
+                  />
+                );
               }}
-              onChange={(e) => {
-                if (e) setType(e.value);
-              }}
-              isClearable={false}
-              isSearchable={true}
-              name="type"
-              options={types.map((type) => ({ value: type, label: type }))}
-              className="min-w-[250px] mt-1"
-              classNamePrefix="react-select"
-            />
+            </ClientOnly>
           </div>
           <div className="sm:ml-4 mt-2 sm:mt-0">
             <label className="text-gray-400 uppercase tracking-wider font-bold">
               Blockchain
             </label>
-            <Select<{ value: string; label: string }>
-              value={{
-                label: blockchain,
-                value: blockchain,
+            <ClientOnly
+              fallback={
+                <div className="bg-gray-800 h-9 rounded-md border border-gray-400 w-full sm:w-[150px] mt-1" />
+              }
+            >
+              {() => {
+                return (
+                  <Select<{ value: string; label: string }>
+                    value={{
+                      label: blockchain,
+                      value: blockchain,
+                    }}
+                    onChange={(e) => {
+                      if (e) setBlockchain(e.value);
+                    }}
+                    inputId="select-blockchain"
+                    instanceId="select-blockchain"
+                    isClearable={false}
+                    isSearchable={true}
+                    name="chain"
+                    options={chains.map((chain) => ({
+                      value: chain.id,
+                      label: chain.name,
+                    }))}
+                    className="min-w-[150px] mt-1"
+                    classNamePrefix="react-select"
+                  />
+                );
               }}
-              onChange={(e) => {
-                if (e) setBlockchain(e.value);
-              }}
-              isClearable={false}
-              isSearchable={true}
-              name="chain"
-              options={chains.map((chain) => ({
-                value: chain.id,
-                label: chain.name,
-              }))}
-              className="min-w-[150px] mt-1"
-              classNamePrefix="react-select"
-            />
+            </ClientOnly>
           </div>
           <button
             className={`px-4 py-[6px] mt-4 sm:mt-0 w-full sm:w-auto ml-auto rounded border outline-none focus:ring transition-all font-bold ${

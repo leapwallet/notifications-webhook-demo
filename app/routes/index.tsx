@@ -1,9 +1,10 @@
 import { chains, types } from '~/lib/constants';
 import { useEffect, useState } from 'react';
-import { ClientOnly, useEventSource } from 'remix-utils';
+import { ClientOnly } from 'remix-utils';
 import { ReactJson, theme } from '~/react-json.client';
 import Select from 'react-select';
 import BellRinging from '~/assets/icons';
+import { useEventSource } from '~/hooks/use-event-source';
 
 export default function HomePage() {
   const [type, setType] = useState<string>('cosmos.bank.send');
@@ -12,14 +13,13 @@ export default function HomePage() {
 
   const [allData, setAllData] = useState<Record<string, unknown>[]>([]);
 
-  let data = useEventSource(
-    subscribed
-      ? `/sse/transactions?blockchain=${encodeURIComponent(
-          blockchain!
-        )}&type=${encodeURIComponent(type!)}`
-      : '',
+  const latestEventData = useEventSource<Record<string, string>>(
+    `/sse/transactions?blockchain=${encodeURIComponent(
+      blockchain!
+    )}&type=${encodeURIComponent(type!)}`,
     {
       event: 'tx',
+      enabled: subscribed,
     }
   );
 
@@ -28,12 +28,16 @@ export default function HomePage() {
   }, [type, blockchain]);
 
   useEffect(() => {
-    if (data === null) {
+    if (latestEventData === null) {
       return;
     }
-    // @ts-ignore
-    setAllData((prev) => [...prev, JSON.parse(data)]);
-  }, [data]);
+    setAllData((prev) => {
+      if (prev.length === 100) {
+        return [...prev.slice(10), latestEventData];
+      }
+      return [...prev, latestEventData];
+    });
+  }, [latestEventData]);
 
   useEffect(() => {
     const jsonContainer = document.querySelector(
@@ -124,7 +128,7 @@ export default function HomePage() {
             Webhook Data
           </p>
           <div
-            className="h-[50vh] sm:h-[65vh] overflow-y-auto rounded border border-gray-500 p-4 mt-2"
+            className="h-[50vh] sm:h-[65vh] overflow-y-auto rounded border border-gray-500 p-4 mt-2 relative"
             style={{ background: '#282c34' }}
           >
             <ClientOnly
@@ -138,28 +142,41 @@ export default function HomePage() {
                         No data to display
                       </p>
                       <p className="mt-1 text-gray-400 text-center text-sm sm:text-base">
-                        Subscribe to a webhook to see data here
+                        {subscribed
+                          ? 'Waiting for data'
+                          : 'Subscribe to a webhook to see data here'}
                       </p>
                     </div>
                   );
                 }
                 return (
-                  <ReactJson
-                    src={allData}
-                    theme={theme}
-                    iconStyle="square"
-                    displayDataTypes={false}
-                    displayObjectSize={false}
-                    enableClipboard={false}
-                    quotesOnKeys={false}
-                    shouldCollapse={false}
-                    style={{
-                      fontFamily:
-                        'SF Mono, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-                      fontSize: '0.8rem',
-                      userSelect: 'none',
-                    }}
-                  />
+                  <>
+                    <button
+                      className="sticky block z-10 text-sm px-3 py-1 top-0 left-0 sm:mt-0 w-full sm:w-auto ml-auto rounded border outline-none focus:ring bg-gray-800 text-gray-300"
+                      onClick={() => {
+                        setAllData([]);
+                      }}
+                    >
+                      Clear
+                    </button>
+                    <ReactJson
+                      src={allData}
+                      theme={theme}
+                      iconStyle="square"
+                      displayDataTypes={false}
+                      displayObjectSize={false}
+                      enableClipboard={false}
+                      quotesOnKeys={false}
+                      shouldCollapse={false}
+                      style={{
+                        fontFamily:
+                          'SF Mono, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                        fontSize: '0.8rem',
+                        userSelect: 'none',
+                        marginTop: '-1.5rem',
+                      }}
+                    />
+                  </>
                 );
               }}
             </ClientOnly>

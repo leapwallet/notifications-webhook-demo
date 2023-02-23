@@ -12,8 +12,15 @@ export default {
     if (asPath !== '/') {
       return {
         titleTemplate: '%s - Leap Alerts',
+        description:
+          'Leap Alerts - A simple webhook service for you to receive transactions in the cosmos blockchain universe',
       };
     }
+    return {
+      title: 'Documentation - Leap Alerts',
+      description:
+        'Leap Alerts - A simple webhook service for you to receive transactions in the cosmos blockchain universe',
+    };
   },
   chat: {
     link: 'https://twitter.com/leap_wallet',

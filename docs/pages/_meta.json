@@ -1,12 +1,12 @@
 {
-  "index": "Introduction",
-  "messages": "Messages",
-  "blockchains": "Blockchains",
-  "msgs": "Messages",
   "demo_link": {
     "title": "Try Webhook Demo",
     "href": "https://notifications-webhook-demo.leapwallet.io",
     "type": "page",
     "newWindow": true
-  }
+  },
+  "index": "Introduction",
+  "messages": "Messages",
+  "blockchains": "Blockchains",
+  "msgs": "Messages"
 }

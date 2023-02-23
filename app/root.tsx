@@ -15,6 +15,8 @@ export const meta: MetaFunction = () => ({
   charset: 'utf-8',
   title: 'Leap Alerts',
   viewport: 'width=device-width,initial-scale=1',
+  description:
+    'Leap Alerts - A simple webhook service for you to receive transactions in the cosmos blockchain universe',
 });
 
 export const links: LinksFunction = () => [

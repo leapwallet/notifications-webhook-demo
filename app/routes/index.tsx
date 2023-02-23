@@ -172,7 +172,6 @@ export default function HomePage() {
                         fontFamily:
                           'SF Mono, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
                         fontSize: '0.8rem',
-                        userSelect: 'none',
                         marginTop: '-1.5rem',
                       }}
                     />

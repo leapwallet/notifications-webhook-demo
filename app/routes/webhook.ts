@@ -13,7 +13,12 @@ export async function action({ request }: ActionArgs) {
   let data = await request.json();
 
   if (data) {
-    emitter.emit(`${data.blockchain}:${data.__type}`, JSON.stringify(data));
+    const event = `${data.blockchain}:${data.__type}`;
+    // check if there are listeners for event
+    if (emitter.listenerCount(event) > 0) {
+      console.log('Sent Event', Date.now(), event, data.txHash);
+      emitter.emit(event, JSON.stringify(data));
+    }
     return created('ok');
   }
 

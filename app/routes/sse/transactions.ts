@@ -11,8 +11,15 @@ export async function loader({ request }: LoaderArgs) {
   const event = `${blockchain}:${type}`;
 
   const response = eventStream(request.signal, (send) => {
-    const handle = (tx: string) => {
-      send({ event: 'tx', data: tx });
+    const handle = (_tx: string) => {
+      const tx = JSON.parse(_tx);
+      console.log(
+        'Received Event',
+        Date.now(),
+        `${tx.blockchain}:${tx.__type}`,
+        tx.txHash
+      );
+      send({ event: 'tx', data: _tx });
     };
 
     emitter.addListener(event, handle);

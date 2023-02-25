@@ -16,8 +16,7 @@ export async function action({ request }: ActionArgs) {
     const event = `${data.blockchain}:${data.__type}`;
     // check if there are listeners for event
     if (emitter.listenerCount(event) > 0) {
-      console.log('Sent Event', Date.now(), event, data.txHash);
-      emitter.emit(event, JSON.stringify(data));
+      emitter.emit(event, JSON.stringify(data), data.txHash);
     }
     return created('ok');
   }

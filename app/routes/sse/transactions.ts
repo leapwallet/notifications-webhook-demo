@@ -1,6 +1,9 @@
 import type { ActionArgs, LoaderArgs } from '@remix-run/node';
-import { eventStream } from 'remix-utils';
+import { customAlphabet } from 'nanoid';
+import { eventStream } from '~/lib/server/event-stream';
 import { emitter } from '~/services/emitter.server';
+
+const generateId = customAlphabet('1234567890abcdef', 64);
 
 export async function loader({ request }: LoaderArgs) {
   let params = new URL(request.url).searchParams;
@@ -11,20 +14,13 @@ export async function loader({ request }: LoaderArgs) {
   const event = `${blockchain}:${type}`;
 
   const response = eventStream(request.signal, (send) => {
-    const handle = (_tx: string) => {
-      const tx = JSON.parse(_tx);
-      console.log(
-        'Received Event',
-        Date.now(),
-        `${tx.blockchain}:${tx.__type}`,
-        tx.txHash
-      );
-      send({ event: 'tx', data: _tx });
+    const handle = (txData: string, txHash: string) => {
+      send({ event: 'tx', data: txData, id: txHash });
     };
 
     emitter.addListener(event, handle);
 
-    send({ event: 'tx', data: 'null' });
+    send({ event: 'tx', data: 'null', id: generateId() });
 
     return function clear() {
       emitter.removeListener(event, handle);

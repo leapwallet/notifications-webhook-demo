@@ -99,6 +99,6 @@ setInterval(() => {
     __type: 'cosmos.bank.send',
     blockchain: 'cosmosHub',
     // random hash of 64 characters
-    hash: `${getHash()}${getHash()}${getHash()}${getHash()}`,
+    txHash: `${getHash()}${getHash()}${getHash()}${getHash()}`,
   });
 }, 1500);

@@ -22,7 +22,7 @@ export function useEventSource<T = any>(
 
     const eventSource = new EventSource(url, init);
     const listener = (event: MessageEvent) => {
-      if (event.data) {
+      if (event.data && event.data !== null && event.data !== '') {
         setData(JSON.parse(event.data));
       } else {
         setData(null);

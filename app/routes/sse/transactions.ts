@@ -24,6 +24,8 @@ export async function loader({ request }: LoaderArgs) {
 
     emitter.addListener(event, handle);
 
+    send({ event: 'tx', data: 'null' });
+
     return function clear() {
       emitter.removeListener(event, handle);
     };

@@ -3,7 +3,10 @@ type IconProps = {
   strokeWidth?: number;
 };
 
-const BellRinging: React.FC<IconProps> = ({ size = 24, strokeWidth = 24 }) => {
+export const BellRinging: React.FC<IconProps> = ({
+  size = 24,
+  strokeWidth = 24,
+}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -49,4 +52,49 @@ const BellRinging: React.FC<IconProps> = ({ size = 24, strokeWidth = 24 }) => {
   );
 };
 
-export default BellRinging;
+export const CaretDown: React.FC<IconProps> = ({
+  size = 24,
+  strokeWidth = 24,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill="#000000"
+      viewBox="0 0 256 256"
+    >
+      <rect width="256" height="256" fill="none"></rect>
+      <polyline
+        points="208 96 128 176 48 96"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={strokeWidth}
+      ></polyline>
+    </svg>
+  );
+};
+
+export const Check: React.FC<IconProps> = ({ strokeWidth = 24, size = 24 }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      fill="#000000"
+      viewBox="0 0 256 256"
+    >
+      <rect width="256" height="256" fill="none"></rect>
+      <polyline
+        points="216 72 104 184 48 128"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={strokeWidth}
+      ></polyline>
+    </svg>
+  );
+};

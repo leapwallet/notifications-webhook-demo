@@ -1,23 +1,29 @@
 import { chains, types } from '~/lib/constants';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, Fragment } from 'react';
 import { ClientOnly } from 'remix-utils';
 import { ReactJson, theme } from '~/react-json.client';
-import BellRinging from '~/assets/icons';
+import { BellRinging, CaretDown } from '~/assets/icons';
 import { useEventSource } from '~/hooks/use-event-source';
-import { Select } from '~/react-select.client';
 import { signal } from '@preact/signals-react';
+import { Listbox, Transition } from '@headlessui/react';
 
 export const webhookData = signal<Record<string, any>[]>([]);
 
 export default function HomePage() {
-  const [type, setType] = useState<string>('cosmos.bank.send');
-  const [blockchain, setBlockchain] = useState<string>('cosmosHub');
+  const [type, setType] = useState({
+    name: 'Send',
+    id: 'cosmos.bank.send',
+  });
+  const [blockchain, setBlockchain] = useState({
+    name: 'Cosmos Hub',
+    id: 'cosmosHub',
+  });
   const [subscribed, setSubscribed] = useState(false);
 
   useEventSource(
     `/sse/transactions?blockchain=${encodeURIComponent(
-      blockchain!
-    )}&type=${encodeURIComponent(type!)}`,
+      blockchain.id!
+    )}&type=${encodeURIComponent(type.id!)}`,
     {
       event: 'tx',
       enabled: subscribed,
@@ -71,71 +77,101 @@ export default function HomePage() {
             <label className="text-gray-400 uppercase tracking-wider font-bold">
               Tx Type
             </label>
-            <ClientOnly
-              fallback={
-                <div className="bg-gray-800 h-9 rounded-md border border-gray-400 w-full sm:w-[250px] mt-1" />
-              }
+            <Listbox
+              value={type.id}
+              onChange={(id) => setType(types.find((t) => t.id === id)!)}
             >
-              {() => {
-                return (
-                  <Select<{ value: string; label: string }>
-                    value={{
-                      label: type,
-                      value: type,
-                    }}
-                    onChange={(e) => {
-                      if (e) setType(e.value);
-                    }}
-                    isClearable={false}
-                    isSearchable={true}
-                    name="type"
-                    inputId="select-type"
-                    instanceId="select-type"
-                    options={types.map((type) => ({
-                      value: type,
-                      label: type,
-                    }))}
-                    className="min-w-[250px] mt-1"
-                    classNamePrefix="react-select"
-                  />
-                );
-              }}
-            </ClientOnly>
+              <div className="relative mt-1 min-w-[200px] w-full">
+                <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-500 bg-[#282c34] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm text-gray-50">
+                  <span className="block truncate">{type.name}</span>
+                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <CaretDown size={20} />
+                  </span>
+                </Listbox.Button>
+                <Transition
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#282c34] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
+                    {types.map(({ name: txName, id: txType }) => (
+                      <Listbox.Option
+                        key={txType}
+                        className={({ active, selected }) =>
+                          `relative cursor-default select-none py-2 px-4 text-gray-50 ${
+                            active ? (!selected ? 'bg-gray-500' : '') : ''
+                          } ${selected ? 'bg-blue-400' : ''}`
+                        }
+                        value={txType}
+                      >
+                        {({ selected }) => (
+                          <>
+                            <span
+                              className={`block truncate ${
+                                selected ? 'font-bold' : 'font-normal'
+                              }`}
+                            >
+                              {txName}
+                            </span>
+                          </>
+                        )}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </div>
+            </Listbox>
           </div>
           <div className="sm:ml-4 mt-2 sm:mt-0">
             <label className="text-gray-400 uppercase tracking-wider font-bold">
               Blockchain
             </label>
-            <ClientOnly
-              fallback={
-                <div className="bg-gray-800 h-9 rounded-md border border-gray-400 w-full sm:w-[150px] mt-1" />
-              }
+            <Listbox
+              value={blockchain.id}
+              onChange={(id) => setBlockchain(chains.find((t) => t.id === id)!)}
             >
-              {() => {
-                return (
-                  <Select<{ value: string; label: string }>
-                    value={{
-                      label: blockchain,
-                      value: blockchain,
-                    }}
-                    onChange={(e) => {
-                      if (e) setBlockchain(e.value);
-                    }}
-                    inputId="select-blockchain"
-                    instanceId="select-blockchain"
-                    isClearable={false}
-                    isSearchable={true}
-                    name="chain"
-                    options={chains.map((chain) => ({
-                      value: chain.id,
-                      label: chain.name,
-                    }))}
-                    className="min-w-[150px] mt-1"
-                    classNamePrefix="react-select"
-                  />
-                );
-              }}
-            </ClientOnly>
+              <div className="relative mt-1 min-w-[200px] w-full">
+                <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-500 bg-[#282c34] py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm text-gray-50">
+                  <span className="block truncate">{blockchain.name}</span>
+                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <CaretDown size={20} />
+                  </span>
+                </Listbox.Button>
+                <Transition
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#282c34] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
+                    {chains.map(({ name: chainName, id: chainId }) => (
+                      <Listbox.Option
+                        key={chainId}
+                        className={({ active, selected }) =>
+                          `relative cursor-default select-none py-2 px-4 text-gray-50 ${
+                            active ? (!selected ? 'bg-gray-500' : '') : ''
+                          } ${selected ? 'bg-blue-400' : ''}`
+                        }
+                        value={chainId}
+                      >
+                        {({ selected }) => (
+                          <>
+                            <span
+                              className={`block truncate ${
+                                selected ? 'font-bold' : 'font-normal'
+                              }`}
+                            >
+                              {chainName}
+                            </span>
+                          </>
+                        )}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </div>
+            </Listbox>
           </div>
           <button
             className={`px-4 py-[6px] mt-4 sm:mt-0 w-full sm:w-auto ml-auto rounded border outline-none focus:ring transition-all font-bold ${

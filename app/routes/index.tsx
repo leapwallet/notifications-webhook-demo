@@ -1,53 +1,53 @@
 import { chains, types } from '~/lib/constants';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ClientOnly } from 'remix-utils';
 import { ReactJson, theme } from '~/react-json.client';
 import BellRinging from '~/assets/icons';
 import { useEventSource } from '~/hooks/use-event-source';
 import { Select } from '~/react-select.client';
+import { signal } from '@preact/signals-react';
+
+export const webhookData = signal<Record<string, any>[]>([]);
 
 export default function HomePage() {
   const [type, setType] = useState<string>('cosmos.bank.send');
   const [blockchain, setBlockchain] = useState<string>('cosmosHub');
   const [subscribed, setSubscribed] = useState(false);
 
-  const [allData, setAllData] = useState<Record<string, unknown>[]>([]);
-
-  const latestEventData = useEventSource<Record<string, string>>(
+  useEventSource(
     `/sse/transactions?blockchain=${encodeURIComponent(
       blockchain!
     )}&type=${encodeURIComponent(type!)}`,
     {
       event: 'tx',
       enabled: subscribed,
-    }
+    },
+    webhookData
   );
 
-  useEffect(() => {
-    setAllData([]);
-  }, [type, blockchain]);
-
-  useEffect(() => {
-    if (latestEventData === null) {
-      return;
+  const resetData = useCallback(() => {
+    if (webhookData.peek().length > 0) {
+      webhookData.value = [];
     }
-    setAllData((prev) => {
-      if (prev.length === 100) {
-        return [...prev.slice(10), latestEventData];
-      }
-      return [...prev, latestEventData];
-    });
-  }, [latestEventData]);
+  }, []);
 
   useEffect(() => {
-    const jsonContainer = document.querySelector(
-      '.object-key-val > .object-container > .object-content'
-    );
-    const lastChild = jsonContainer?.lastChild as Element | null;
-    lastChild?.scrollIntoView({
-      behavior: 'smooth',
+    resetData();
+  }, [type, blockchain, resetData]);
+
+  useEffect(() => {
+    webhookData.subscribe(() => {
+      const jsonContainer = document.querySelector(
+        '.react-json-view .object-key-val > .object-container > .object-content'
+      );
+      setTimeout(() => {
+        const lastChild = jsonContainer?.lastChild as Element | null;
+        lastChild?.scrollIntoView({
+          behavior: 'smooth',
+        });
+      }, 50);
     });
-  }, [allData]);
+  }, []);
 
   return (
     <div className="w-full h-screen bg-gradient-to-tr from-gray-900 via-slate-900 to-gray-900 backdrop-blur-md py-8">
@@ -162,7 +162,7 @@ export default function HomePage() {
               fallback={<div className="bg-transparent w-full h-full" />}
             >
               {() => {
-                if (allData.length === 0) {
+                if (webhookData.value.length === 0) {
                   return (
                     <div className="flex flex-col justify-center items-center w-full h-full">
                       <p className="text-gray-300 text-center font-bold sm:text-lg">
@@ -180,14 +180,12 @@ export default function HomePage() {
                   <>
                     <button
                       className="sticky block z-10 text-sm px-3 py-1 top-0 left-0 sm:mt-0 w-full sm:w-auto ml-auto rounded border outline-none focus:ring bg-gray-800 text-gray-300"
-                      onClick={() => {
-                        setAllData([]);
-                      }}
+                      onClick={resetData}
                     >
                       Clear
                     </button>
                     <ReactJson
-                      src={allData}
+                      src={webhookData.value}
                       theme={theme}
                       iconStyle="square"
                       displayDataTypes={false}

@@ -1465,6 +1465,19 @@
     tiny-glob "^0.2.9"
     tslib "^2.4.0"
 
+"@preact/signals-core@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@preact/signals-core/-/signals-core-1.2.3.tgz#36bf8b31027a5b9ade9e50cf9fba80614e8a2354"
+  integrity sha512-Kui4p7PMcEQevBgsTO0JBo3gyQ88Q3qzEvsVCuSp11t0JcN4DmGCTJcGRVSCq7Bn7lGxJBO+57jNSzDoDJ+QmA==
+
+"@preact/signals-react@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@preact/signals-react/-/signals-react-1.2.2.tgz#16046c533e7e7592419d6dd21f9017cca3963f6b"
+  integrity sha512-GoESQ9n1bns2FD+8yqH7lBvQMavboKLCNEW+s0hs3Wcp5B1VHvVxwJo6aFs6rpxoh1/q8Tvwbi4vIeehBD2mzA==
+  dependencies:
+    "@preact/signals-core" "^1.2.3"
+    use-sync-external-store "^1.2.0"
+
 "@remix-run/dev@^1.13.0":
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/@remix-run/dev/-/dev-1.13.0.tgz#6fa065c4ebadfdffe077b0229740bcedf71255c4"
@@ -7545,7 +7558,7 @@ use-latest@^1.2.1:
   dependencies:
     use-isomorphic-layout-effect "^1.1.1"
 
-use-sync-external-store@1.2.0:
+use-sync-external-store@1.2.0, use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==

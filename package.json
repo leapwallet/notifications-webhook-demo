@@ -13,6 +13,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@preact/signals-react": "^1.2.2",
     "@remix-run/express": "^1.13.0",
     "@remix-run/node": "^1.13.0",
     "@remix-run/react": "^1.13.0",

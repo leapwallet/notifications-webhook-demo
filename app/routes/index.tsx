@@ -43,15 +43,11 @@ export default function HomePage() {
 
   useEffect(() => {
     webhookData.subscribe(() => {
-      const jsonContainer = document.querySelector(
-        '.react-json-view .object-key-val > .object-container > .object-content'
-      );
+      const jsonContainer = document.querySelector('.react-json-view');
+
       setTimeout(() => {
-        const lastChild = jsonContainer?.lastChild as Element | null;
-        lastChild?.scrollIntoView({
-          behavior: 'smooth',
-        });
-      }, 50);
+        jsonContainer?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+      }, 100);
     });
   }, []);
 

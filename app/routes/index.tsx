@@ -57,7 +57,7 @@ export default function HomePage() {
 
   return (
     <div className="w-full h-screen bg-gradient-to-tr from-gray-900 via-slate-900 to-gray-900 backdrop-blur-md py-8">
-      <header className="container mx-auto px-4 sm:px-auto text-gray-200 flex justify-between items-center">
+      <header className="container mx-auto px-4 sm:px-auto text-gray-200 flex items-center">
         <div className="flex items-center">
           <BellRinging strokeWidth={28} size={28} />
           <h1 className="font-bold text-2xl sm:text-3xl ml-2">Leap Alerts</h1>
@@ -66,7 +66,7 @@ export default function HomePage() {
           href="https://leapwallet.github.io/notifications-webhook-demo/"
           target="_blank"
           rel="noreferrer noopener"
-          className="block underline text-gray-300 hover:text-green-400 transition-all text-lg font-bold"
+          className="ml-auto block underline text-gray-300 hover:text-green-400 transition-all text-lg font-bold"
         >
           Docs
         </a>
@@ -94,7 +94,7 @@ export default function HomePage() {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#282c34] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
+                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#282c34] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10 border border-gray-600">
                     {types.map(({ name: txName, id: txType }) => (
                       <Listbox.Option
                         key={txType}
@@ -144,7 +144,7 @@ export default function HomePage() {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#282c34] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
+                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-[#282c34] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10 border border-gray-600">
                     {chains.map(({ name: chainName, id: chainId }) => (
                       <Listbox.Option
                         key={chainId}

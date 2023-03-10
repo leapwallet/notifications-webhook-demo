@@ -44,3 +44,4 @@ The table below documents which blockchains are supported. The **Ecosystem** col
 | [Cosmos](https://cosmos.network/) |        [Carbon](https://carbon.network/)         |      `carbon-1`      |    `"carbon"`     |
 | [Cosmos](https://cosmos.network/) |         [Cudos](https://www.cudos.org/)          |      `cudos-1`       |     `"cudos"`     |
 | [Cosmos](https://cosmos.network/) |         [Decentr](https://decentr.net/)          |     `mainnet-3`      |    `"decentr"`    |
+| [Near](https://near.org/) |         [Near](https://near.org/)          |     `mainnet`      |    `"near"`    |

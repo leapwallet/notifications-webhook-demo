@@ -39,6 +39,7 @@ export const chains = [
   { name: 'Teritori', id: 'teritori' },
   { name: 'Terra 2.0', id: 'terra2' },
   { name: 'Umee', id: 'umee' },
+  { name: 'Near', id: 'near' },
 ];
 
 export const types = [
@@ -79,4 +80,13 @@ export const types = [
     name: 'SF Unlock & Undelegate',
     id: 'cosmos.superfluid.unlockAndUndelegate',
   },
+  { name: 'Social Set', id: 'near.social.set' },
+  { name: 'Social Follow', id: 'near.social.follow' },
+  { name: 'Transfer Native', id: 'near.transfer.native' },
+  { name: 'Transfer Non Native', id: 'near.transfer.nonNative' },
+  { name: 'Stake', id: 'near.staking.stake' },
+  { name: 'Unstake', id: 'near.staking.unstake' },
+  { name: 'Unstake All', id: 'near.staking.unstakeAll' },
+  { name: 'Withdraw All', id: 'near.staking.withdrawAll' },
+
 ];

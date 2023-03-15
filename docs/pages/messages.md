@@ -46,4 +46,6 @@ Here are the messages that can be sent:
 - [`near.transfer.native`](msgs/near/transfer/native)
 - [`near.transfer.nonNative`](msgs/near/transfer/non-native)
 - [`near.social.set`](msgs/near/social/set)
-- [`near.social.follow`](msgs/near/social/follow)
+- [`near.social.set.follow`](msgs/near/social/follow)
+- [`near.social.set.like`](msgs/near/social/like)
+- [`near.social.set.poke`](msgs/near/social/poke)

@@ -3,7 +3,7 @@ import { customAlphabet } from 'nanoid';
 import { eventStream } from '~/lib/server/event-stream';
 import { emitter } from '~/services/emitter.server';
 
-const generateId = customAlphabet('1234567890abcdef', 64);
+const generateId = customAlphabet('123456789ABCDEF', 64);
 
 export async function loader({ request }: LoaderArgs) {
   let params = new URL(request.url).searchParams;

@@ -1,6 +1,6 @@
 # `near.social.set`
 
-An account on near social followed another account.
+An account has committed data to social DB.
 
 ## Schema
 

@@ -7,6 +7,9 @@ The current flow to get notified of a transaction is to:
 
 Using Leap Wallet’s webhook service, you can easily get notified of transactions that you’re interested in using the following flow:
 
+
+<img alt="Webhooks Form" src="./form.png" width="100%" />
+
 1. Give us a webhook URL. For example, `https://example.com/new-transaction`.
 2. Give us the blockchain that you’re interested in receiving transactions for (check `[blockchains.md](http://blockchains.md)` in the docs linked below).
 3. Give us the transaction types that you’re interested in receiving (only certain transactions  are supported), then give us the message types such as `cosmos.bank.send` listed in the docs(`[messages.md](http://messages.md)`).

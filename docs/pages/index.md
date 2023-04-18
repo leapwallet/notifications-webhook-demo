@@ -14,4 +14,7 @@ Using Leap Wallet’s webhook service, you can easily get notified of transactio
 2. Give us the blockchain that you’re interested in receiving transactions for (check `[blockchains.md](http://blockchains.md)` in the docs linked below).
 3. Give us the transaction types that you’re interested in receiving (only certain transactions  are supported), then give us the message types such as `cosmos.bank.send` listed in the docs(`[messages.md](http://messages.md)`).
 4. If your server is protected and won't accept requests without an authentication header, please ensure that you provide us the required token (as mentioned in the form).
-5. Once you fill up the form correctly and submit, we will send you a `Verification Key` on the provided webhook URL. You will need to submit that key in order to complete the creation of the webhook.
+5. Once you fill up the form correctly and submit, we will send you a `Verification Code` on the provided webhook URL. You will need to submit that key in order to complete the creation of the webhook.
+
+![Verification Modal](/images/verification-modal.png)
+

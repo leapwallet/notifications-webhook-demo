@@ -38,7 +38,7 @@ The table below documents which blockchains are supported. The **Ecosystem** col
 | [Cosmos](https://cosmos.network/) |            [Canto](https://canto.io/)            |    `canto_7700-1`    |     `"canto"`     |
 | [Cosmos](https://cosmos.network/) |          [Comdex](https://comdex.one/)           |      `comdex-1`      |    `"comdex"`     |
 | [Cosmos](https://cosmos.network/) |          [Bitsong](https://bitsong.io/)          |     `bitsong-2b`     |    `"bitSong"`    |
-| [Cosmos](https://cosmos.network/) |        [Sei(Atlantic 2)](https://www.seinetwork.io/)         |     `atlantic-2`     |      `"sei"`      |
+| [Cosmos](https://cosmos.network/) |        [Sei(Atlantic 2)](https://www.seinetwork.io/)         |     `atlantic-2`     |      `"seiAtlantic2TestNet"`      |
 | [Cosmos](https://cosmos.network/) |          [Mars](https://marsproto.com/)          |       `mars-1`       |     `"mars"`      |
 | [Cosmos](https://cosmos.network/) |       [BitCanna](https://www.bitcanna.io/)       |     `bitcanna-1`     |   `"bitCanna"`    |
 | [Cosmos](https://cosmos.network/) |        [Carbon](https://carbon.network/)         |      `carbon-1`      |    `"carbon"`     |

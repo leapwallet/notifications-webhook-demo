@@ -16,6 +16,7 @@ Using Leap Wallet’s webhook service, you can easily get notified of transactio
 4. If your server is protected and won't accept requests without an authentication header, please ensure that you provide us the required token (as mentioned in the form).
 5. Once you fill up the form correctly and submit, we will send you a `Verification Code` on the provided webhook URL. You will need to submit that key in order to complete the creation of the webhook.
 
+[Demo Video](https://drive.google.com/file/d/1Odknfd4YZrxtMeAeYnXzxiVbkTaXFFEc/view?usp=sharing)
+
 ![Verification Modal](/images/verification-modal.png)
 
-[Demo Video](https://drive.google.com/file/d/1Odknfd4YZrxtMeAeYnXzxiVbkTaXFFEc/view?usp=sharing)
